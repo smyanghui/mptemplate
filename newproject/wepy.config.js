@@ -1,5 +1,11 @@
 const path = require('path');
-var prod = process.env.NODE_ENV === 'production';
+const fs = require('fs');
+const env = process.env.NODE_ENV || 'dev';
+var prod = env === 'prd';
+
+// 写入环境变量
+const EnvString = `module.exports = '${env}';\n`;
+fs.writeFileSync('./src/config/env.js', EnvString);
 
 module.exports = {
   wpyExt: '.wpy',
