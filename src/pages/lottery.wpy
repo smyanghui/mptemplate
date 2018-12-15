@@ -1,0 +1,91 @@
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+</style>
+<template>
+
+  <view class="container">
+    <view wx:key="index" wx:for="{{lotteryList}}">
+      <text @tap="vDetail({{item.lottery_id}}, {{item.lottery_type_id}})">{{item.lottery_name}}</text> -- {{item.remarks}}
+    </view>
+  </view>
+
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import request from '@/utils/request';
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'test',
+    }
+
+    components = {
+    }
+
+    mixins = []
+
+    data = {
+      mynum: 20,
+      lotteryList: [],
+    }
+
+    computed = {
+      now () {
+        return +new Date();
+      },
+    }
+
+    methods = {
+      vDetail(no) {
+        this.xiangxi(no);
+      },
+    }
+
+    ceshi() {
+      request({
+        url: 'https://apis.juhe.cn/lottery/types',
+        data: {key: '82d47314d590c63808c7edc18363be16'},
+        success: (res) => {
+          this.lotteryList = res;
+          this.$apply();
+        }
+      });
+    }
+
+    xiangxi(no) {
+      console.log(no);
+      request({
+        url: 'https://apis.juhe.cn/lottery/query',
+        data: {
+          lottery_id: no,
+          lottery_no: '',
+          key: '82d47314d590c63808c7edc18363be16',
+        },
+        success: (res) => {
+          console.log(res);
+          this.$apply();
+        }
+      });
+    }
+
+    onLoad() {
+      this.ceshi();
+      // self.$apply();
+    }
+  }
+</script>

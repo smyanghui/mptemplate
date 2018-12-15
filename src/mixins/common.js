@@ -11,7 +11,7 @@ export default class extends wepy.mixin {
     ready: false,
     env,
     imgUrl,
-    authSetting: {},
+    authSetting: {}
   };
 
   computed = {
@@ -20,7 +20,7 @@ export default class extends wepy.mixin {
   methods = {
 
     // 页面跳转
-    toUrl(url, rType='page') {
+    toUrl(url, rType = 'page') {
       // 无参数跳转首页
       if (!url) {
         url = '/pages/index';
@@ -38,7 +38,7 @@ export default class extends wepy.mixin {
     // 授权用户信息
     allowUserInfo(e) {
       this.updateUserInfo(e);
-    },
+    }
 
   };
 
@@ -52,8 +52,8 @@ export default class extends wepy.mixin {
       data: { formId },
       options: {
         noLoading: true,
-        noModal: true,
-      },
+        noModal: true
+      }
     });
   }
 
@@ -64,7 +64,7 @@ export default class extends wepy.mixin {
       const data = {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
-        userInfo: e.detail.userInfo,
+        userInfo: e.detail.userInfo
       };
       login.updateUserInfo(data, callback);
     }
@@ -106,7 +106,7 @@ export default class extends wepy.mixin {
     wx.getSetting({
       success: (res) => {
         this.$root.$parent.globalData.authSetting = res.authSetting;
-      },
+      }
     });
   }
 
@@ -123,5 +123,4 @@ export default class extends wepy.mixin {
     this.ready = true;
     this.$apply();
   }
-
 }

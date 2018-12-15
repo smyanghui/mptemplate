@@ -37,7 +37,6 @@ login.openLogin = function (fn) {
 
 // 调用后台登录接口
 login.appLogin = function (data, fn) {
-
   wepy.request({
     method: 'POST',
     url: `${CANNA}/user/login`,
@@ -57,7 +56,7 @@ login.appLogin = function (data, fn) {
       wx.setStorageSync(`${env}_headimgurl`, result.headimgurl);
       typeof fn === 'function' && fn();
     },
-    fail(err) {
+    fail() {
       wx.showToast({
         title: '获取Token失败a'
       });

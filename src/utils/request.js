@@ -2,15 +2,14 @@ import wepy from 'wepy';
 import config from '../config';
 
 const { env } = config;
-const app = getApp();
+// const app = getApp();
 const accessToken = wx.getStorageSync(`${env}_token`);
 
-function getServerUrl(url, server = 'CANNA') {
-  return url.startsWith('https') ? `${url}` : `${url}`;
-}
+// function getServerUrl(url, server = 'CANNA') {
+//   return url.startsWith('https') ? `${url}` : `${url}`;
+// }
 
 function request(params = {}) {
-
   const { url, server, method = 'get', data, success, fail, complete, options = {} } = params;
   const { isLoading, isNeedCode } = options;
 
@@ -20,13 +19,13 @@ function request(params = {}) {
       title: '正在加载数据...',
       icon: 'loading',
       duration: 10000,
-      mask: true,
+      mask: true
     });
   }
 
   const header = {
-    'Content-Type': 'application/json',
-    'Access-Token': accessToken,
+    'Content-Type': 'application/json'
+    // 'Access-Token': accessToken
   };
 
   wepy.request({
@@ -35,13 +34,14 @@ function request(params = {}) {
     data,
     header,
     success({ statusCode, data: response }) {
-      const code = response.code || response.errorCode;
+      console.log(statusCode, response);
+      const code = response.code || response.error_code;
       const result = response.result || response.data;
 
       if (statusCode !== 200) {
         wx.showModal({
           showCancel: false,
-          content: '请求异常',
+          content: '请求异常'
         });
         return;
       }
@@ -55,23 +55,23 @@ function request(params = {}) {
       if (+code === 0) {
         typeof success === 'function' && success(result);
       } else {
-        const message = response.message;
+        const message = response.message || response.reason;
         wx.showModal({
           showCancel: false,
-          content: message,
+          content: message
         });
       }
     },
     fail() {
       wx.showModal({
         showCancel: false,
-        content: '网络异常，请稍后再试',
+        content: '网络异常，请稍后再试'
       });
     },
     complete() {
-      !noLoading && wx.hideToast();
+      isLoading && wx.hideToast();
       typeof complete === 'function' && complete();
-    },
+    }
   });
 }
 

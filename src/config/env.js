@@ -1,1 +1,1 @@
-module.exports = 'prd';
+module.exports = 'dev';

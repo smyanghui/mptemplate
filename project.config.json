@@ -1,13 +1,15 @@
 {
-  "description": "aaa",
-  "setting": {
-    "urlCheck": true,
-    "es6": false,
-    "postcss": false,
-    "minified": false
-  },
-  "compileType": "miniprogram",
-  "appid": "aaa",
-  "projectname": "newproject",
-  "miniprogramRoot": "./dist"
+	"description": "aaa",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wx38c2b93884cce8c6",
+	"projectname": "newproject",
+	"miniprogramRoot": "dist/",
+	"condition": {}
 }
