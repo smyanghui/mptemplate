@@ -1,6 +1,4 @@
 <style lang="less">
-page {}
-
 .list-box {
   width: 100%;
   .tool {
@@ -10,14 +8,17 @@ page {}
     text-align: center; box-sizing: border-box;
   }
 }
-
 </style>
 
 <template>
 
-<view class="list-box" wx:key="index" wx:for="{{arrList}}">
-  <view class="tool">{{item.name}}</view>
-</view>
+  <view class="list-box" wx:key="index" wx:for="{{arrList}}">
+    <view class="tool">{{item.name}}</view>
+  </view>
+
+  <view>
+    <button open-type="getUserInfo" @getuserinfo="onGotUserInfo">获取用户信息</button>
+  </view>
 
 </template>
 
@@ -37,14 +38,14 @@ export default class Index extends wepy.page {
 
   data = {
     arrList: [
-      {
-        name: '彩票',
-        url: '/pages/lottery',
-      },
-      {
-        name: '星座',
-        url: '/pages/lottery',
-      },
+      // {
+      //   name: '彩票',
+      //   url: '/pages/lottery',
+      // },
+      // {
+      //   name: '星座',
+      //   url: '/pages/lottery',
+      // },
     ],
   }
 
@@ -55,12 +56,30 @@ export default class Index extends wepy.page {
   }
 
   methods = {
-    vDetail(no) {
-      this.xiangxi(no);
+    onGotUserInfo(res) {
+      console.log(res);
     },
   }
 
   onLoad() {
+    wepy.authorize({
+      scope: 'scope.userInfo',
+    }).then((res) => {
+      console.log(123, res);
+    }).catch((res) => {
+      console.log(456, res);
+    });
+
+    // wepy.getUserInfo({
+    //   success (res) {
+    //     this.globalData.userInfo = res.userInfo;
+    //     cb && cb(res.userInfo);
+    //   }
+    // });
+
+    // this.$parent.getUserInfo((res) => {
+    //   console.log(res);
+    // });
     // this.ceshi();
     // self.$apply();
   }

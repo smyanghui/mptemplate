@@ -9,7 +9,7 @@ fs.writeFileSync('./src/config/env.js', EnvString);
 
 module.exports = {
   wpyExt: '.wpy',
-  eslint: true,
+  eslint: false,
   cliLogs: !prod,
   build: {
     web: {

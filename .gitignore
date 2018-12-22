@@ -1,3 +1,6 @@
 node_modules
 dist
 .DS_Store
+src/config/env.js
+.wepycache
+package-lock.json
