@@ -3,8 +3,7 @@
   width: 100%;
   .tool {
     /*display: flex; flex-direction: column; align-items: center;*/
-    float: left; width: 250rpx; height: 250rpx;
-    padding-top: 100rpx;
+    width: 100%; line-height: 30px;
     text-align: center; box-sizing: border-box;
   }
 }
@@ -12,12 +11,14 @@
 
 <template>
 
-  <view class="list-box" wx:key="index" wx:for="{{arrList}}">
-    <view class="tool">{{item.name}}</view>
-  </view>
-
   <view>
     <button open-type="getUserInfo" @getuserinfo="onGotUserInfo">获取用户信息</button>
+  </view>
+
+  <view class="list-box" wx:key="index" wx:for="{{arrList}}">
+    <view class="tool">
+      <navigator url="{{item.url}}" open-type="navigate" hover-class="none">{{item.name}}</navigator>
+    </view>
   </view>
 
 </template>
