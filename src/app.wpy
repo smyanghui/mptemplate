@@ -1,4 +1,5 @@
 <style lang="less">
+@import './assets/style/weui.less';
 page {
   font-family: Helvetica, Tahoma, 'Microsoft YaHei', 'PingFang SC', sans-serif;
 }
